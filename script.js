@@ -75,22 +75,33 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
+//display all movements
+
 const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
-  // console.log(movements);
 
-  movements.forEach(function (mov, i) {
+  movements.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
-    const eachMovement = `
+
+    const html = `
     <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
+     <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}</div>
-      </div>
+     <div class="movements__value">${mov}</div>
+  </div>
     `;
-    containerMovements.insertAdjacentHTML('afterbegin', eachMovement);
+
+    containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
 
 displayMovements(account1.movements);
+
+// calculate display total
+const displayCurrentTotal = function (movements) {
+  const total = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.innerText = `${total} BDT`;
+};
+
+displayCurrentTotal(account1.movements);
