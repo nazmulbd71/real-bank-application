@@ -115,3 +115,13 @@ const createUserName = function () {
 };
 
 createUserName();
+
+// login user -------------------------
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  currentAccount = accounts.find(
+    acc => acc.userName === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+});
