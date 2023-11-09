@@ -101,8 +101,6 @@ const displayMovements = function (movement) {
   });
 };
 
-displayMovements(account1.movements);
-
 // Create User Name
 const createUserName = function () {
   accounts.forEach(acc => {
@@ -116,12 +114,58 @@ const createUserName = function () {
 
 createUserName();
 
+// calculate total deposit withdraw and interest
+const totalAllDepositAndWithdrawal = function (acc) {};
+
+// total current balance
+const totalCurrentBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => (acc += mov));
+  labelBalance.textContent = acc.balance;
+};
+
+const updateUI = function (account) {
+  displayMovements(account.movements);
+  totalCurrentBalance(account);
+};
+
 // login user -------------------------
 let currentAccount;
+
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
   currentAccount = accounts.find(
     acc => acc.userName === inputLoginUsername.value
   );
   console.log(currentAccount);
+  if (currentAccount.pin === Number(inputLoginPin.value)) {
+    containerApp.style.opacity = 100;
+
+    updateUI(currentAccount);
+  } else {
+    alert('wrong user! ⚠️');
+  }
+
+  inputLoginUsername.value = inputLoginPin.value = '';
+});
+
+// Transfer Money ---------------------------------
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const transferToAccount = accounts.find(
+    acc => acc.userName === inputTransferTo.value
+  );
+  if (
+    amount > 0 &&
+    transferToAccount !== currentAccount &&
+    currentAccount?.balance > amount
+  ) {
+    console.log('success');
+    transferToAccount.movements.push(amount);
+    currentAccount.movements.push(-amount);
+
+    updateUI(currentAccount);
+  }
+
+  inputTransferAmount.value = inputTransferTo.value = '';
 });
