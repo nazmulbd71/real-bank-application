@@ -102,3 +102,16 @@ const displayMovements = function (movement) {
 };
 
 displayMovements(account1.movements);
+
+// Create User Name
+const createUserName = function () {
+  accounts.forEach(acc => {
+    acc.userName = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(firstWord => firstWord[0])
+      .join('');
+  });
+};
+
+createUserName();
