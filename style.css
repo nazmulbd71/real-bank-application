@@ -88,7 +88,7 @@ nav {
   gap: 2rem;
 
   /* NOTE This creates the fade in/out animation */
-  opacity: 0;
+  /* opacity: 0; */
   transition: all 1s;
 }
 
@@ -288,4 +288,96 @@ h2 {
 
 .timer {
   font-weight: 600;
+}
+
+/* RESPONSIVE STYLES */
+
+/* Small devices (phones, less than 768px) */
+@media (max-width: 767px) {
+  .app {
+    /* Switch to flexbox layout to control the order of elements */
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Set the order of the elements */
+  .movements {
+    order: 1;
+  }
+
+  .summary {
+    order: 2;
+  }
+
+  .operation--transfer {
+    order: 3;
+  }
+
+  .operation--loan {
+    order: 4;
+  }
+
+  .operation--close {
+    order: 5;
+  }
+
+  /* Other styles for smaller devices */
+  /* Adjust font sizes, paddings, margins, etc. */
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .app {
+    /* Adjust to grid layout for medium devices */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* Adjust the position of summary and operations */
+  .summary,
+  .operation--transfer,
+  .operation--loan,
+  .operation--close {
+    /* Place them where they fit best in your design, for example: */
+    grid-column: 1 / -1; /* Make them span all columns */
+  }
+
+  /* Adjust font sizes, paddings, margins for medium devices */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .app {
+    /* Adjust to grid layout for large devices */
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 2rem;
+  }
+
+  /* Ensure the movements take up the first column */
+  .movements {
+    grid-column: 1 / 2;
+  }
+
+  /* Adjust the position of summary and operations */
+  .summary,
+  .operation--transfer,
+  .operation--loan,
+  .operation--close {
+    grid-column: 2 / 3;
+  }
+
+  /* Adjust other elements as needed for large devices */
+}
+
+/* Extra-large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .app {
+    max-width: 110rem;
+    margin: 5rem auto;
+    /* Adjust grid-template-columns if necessary */
+  }
+
+  /* Adjust other elements as needed for extra-large devices */
 }
